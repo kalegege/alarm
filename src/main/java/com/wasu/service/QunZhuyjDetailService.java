@@ -12,4 +12,6 @@ public interface QunZhuyjDetailService {
     List<QunZhuyjDetail> getAll();
 
     List<QunZhuyjDetail> getByExamle(QunZhuyjDetail qunZhuyjDetail);
+
+    List<QunZhuyjDetail> getByExamleAndDate(QunZhuyjDetail qunZhuyjDetail,String start,String stop);
 }

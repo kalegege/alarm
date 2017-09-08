@@ -371,7 +371,7 @@ public class AlarmController {
             List<User> users = userService.getUserByCode(userDO.getUserid());
             qunZhuyjDetail.setOpId(users.get(0).getId().intValue());
         }
-        List<QunZhuyjDetail> result = qunZhuyjDetailService.getByExamle(qunZhuyjDetail);
+        List<QunZhuyjDetail> result = qunZhuyjDetailService.getByExamleAndDate(qunZhuyjDetail,startDate,stopDate);
         //获取全部数据
 //        List<QunZhuyjDetail> result = qunZhuyjDetailService.getAll();
 
@@ -414,7 +414,7 @@ public class AlarmController {
             List<User> users = userService.getUserByCode(userDO.getUserid());
             qunZhuyjDetail.setOpId(users.get(0).getId().intValue());
         }
-        List<QunZhuyjDetail> result = qunZhuyjDetailService.getByExamle(qunZhuyjDetail);
+        List<QunZhuyjDetail> result = qunZhuyjDetailService.getByExamleAndDate(qunZhuyjDetail,startDate,stopDate);
         //获取全部数据
 //        List<QunZhuyjDetail> result = qunZhuyjDetailService.getAll();
 
