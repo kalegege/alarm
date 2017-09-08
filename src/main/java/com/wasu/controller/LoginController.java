@@ -49,7 +49,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/")
     public Object index() throws Exception {
-        return "login";
+        return "login1";
     }
 
     /**
@@ -70,11 +70,11 @@ public class LoginController {
         DataSourceContextHolder.setDataSourceType(DataSourceConst.VIRTUAL);
 
         if (userDO.getUserid() == null) {
-            return "login";
+            return "login1";
         }
         if (!userService.isProved(userDO)) {
             System.out.println("密码错误");
-            return "login";
+            return "login1";
         }
 
         System.out.println(userDO.getPasswd());

@@ -105,7 +105,7 @@
         });
     });
 
-//    action1();
+    action1();
 
 </script>
 

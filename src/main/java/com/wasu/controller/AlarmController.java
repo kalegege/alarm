@@ -164,7 +164,7 @@ public class AlarmController {
 
         MyUtils.addJspType(model, "getSaleTable");
         addQunZhuAndDiTui(model, MyUtils.addModelByRole(model, role), userDO);
-        return "s_table";
+        return "s_dtable";
     }
 
     /**
@@ -182,12 +182,9 @@ public class AlarmController {
         DataSourceContextHolder.setDataSourceType(DataSourceConst.VIRTUAL);
         //获取当前用户权限
         Role role = roleService.getRoleByUserId(userDO.getUserid());
-        //1-时间2-不显示3-显示群主4-显示群主和地推
-
-        // 根据权限返回值添加下拉框数据
-        addQunZhuAndDiTui(model, MyUtils.addModelByRole(model, role), userDO);
 
         MyUtils.addJspType(model, "getHostDetailTable");
+        addQunZhuAndDiTui(model, MyUtils.addModelByRole(model, role), userDO);
         return "s_table";
     }
 
@@ -211,7 +208,7 @@ public class AlarmController {
         // 根据权限返回值添加下拉框数据
         addQunZhuAndDiTui(model, MyUtils.addModelByRole(model, role), userDO);
 
-        MyUtils.addJspType(model, "getHostDetailTable");
+        MyUtils.addJspType(model, "getSaleDetailTable");
         return "s_table";
     }
 
@@ -307,12 +304,14 @@ public class AlarmController {
      * @throws Exception
      */
     @RequestMapping(value = "getSaleTable")
-    public Object getSaleTable(Model model) throws Exception {
-
+    public Object getSaleTable(Model model, String startDate, String stopDate, String parentId, String opId, HttpServletRequest request) throws Exception {
+        UserDO userDO = (UserDO) request.getSession().getAttribute("adminsession");
         //选择视图数据库
         DataSourceContextHolder.setDataSourceType(DataSourceConst.VIRTUAL);
 
-        List<DiTuiyj> result = diTuiyjService.getAll();
+        Long pId = Long.parseLong(parentId);
+
+        List<DiTuiyj> result = diTuiyjService.getByUserId(pId);
 
         //测试数据
 //        List<LoginStatisticDate> bb = new ArrayList<>();
@@ -344,36 +343,36 @@ public class AlarmController {
 
         System.out.println("开始时间：" + startDate + "结束时间：" + stopDate + "群主id：" + opId + "发展人id：" + parentId);
 
-        System.out.println(userDO.getUserid());
         //选择视图数据库
         DataSourceContextHolder.setDataSourceType(DataSourceConst.VIRTUAL);
         //获取当前用户权限
-        Role role = roleService.getRoleByUserId(userDO.getUserid());
-
-        List<User> users = userService.getUserByCode(userDO.getUserid());
         QunZhuyjDetail qunZhuyjDetail = new QunZhuyjDetail();
-        if (role.getRoleValue().equals("群主") && (role.getId() == 3)) {
+        if (!opId.equals("")) {
+            if (!parentId.equals("")) {
+                //管理员
+                Long pId = Long.parseLong(parentId);
+                Long oId = Long.parseLong(opId);
+                if (pId != 0) {
+                    qunZhuyjDetail.setParentId(pId.intValue());
+                }
+                if (oId != 0) {
+                    qunZhuyjDetail.setOpId(oId.intValue());
+                }
+            } else {
+                //地推
+                Long oId = Long.parseLong(opId);
+                if (oId != 0) {
+                    qunZhuyjDetail.setOpId(oId.intValue());
+                }
+            }
+        } else {
             //群主
+            List<User> users = userService.getUserByCode(userDO.getUserid());
             qunZhuyjDetail.setOpId(users.get(0).getId().intValue());
-        } else if (role.getRoleValue().equals("地推") && (role.getId() == 4)) {
-            //地推
-            qunZhuyjDetail.setParentId(users.get(0).getId().intValue());
         }
         List<QunZhuyjDetail> result = qunZhuyjDetailService.getByExamle(qunZhuyjDetail);
         //获取全部数据
 //        List<QunZhuyjDetail> result = qunZhuyjDetailService.getAll();
-
-
-        //测试数据
-//        List<LoginStatisticDate> bb = new ArrayList<>();
-//        for (int i = 0; i < 50; i++) {
-//            LoginStatisticDate aa = new LoginStatisticDate();
-//            aa.setAreaname("杭州");
-//            aa.setIpCount(100);
-//            aa.setLoginCount(200);
-//            aa.setLoginDate(new Date());
-//            bb.add(aa);
-//        }
 
         model.addAttribute("data", result);
 

@@ -27,6 +27,16 @@ public class DiTuiyjServiceImpl implements DiTuiyjService {
         return diTuiyjMapper.selectByExample(diTuiyjExample);
     }
 
+    @Override
+    public List<DiTuiyj> getByUserId(Long id) {
+        DiTuiyjExample diTuiyjExample=new DiTuiyjExample();
+        DiTuiyjExample.Criteria criteria=diTuiyjExample.createCriteria();
+        if(id !=0){
+            criteria.and发展人idEqualTo(id);
+        }
+        return diTuiyjMapper.selectByExample(diTuiyjExample);
+    }
+
 //    @Override
 //    public List<DiTuiyj> getByUserName(String name) {
 //        return diTuiyjMapper.selectByName(name);

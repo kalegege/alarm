@@ -10,5 +10,5 @@ import java.util.List;
 public interface DiTuiyjService {
     List<DiTuiyj> getAll();
 
-//    List<DiTuiyj> getByUserName(String name);
+    List<DiTuiyj> getByUserId(Long id);
 }

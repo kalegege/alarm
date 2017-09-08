@@ -85,3 +85,29 @@ d3样式
 .tooltip .desText{
     display: inline;
 }
+
+
+.loginModule {
+    margin: 200px auto;
+    border: 1px black solid;
+    width: 300px;
+    height:300px;
+}
+.loginModule .title{
+    margin: 50px 110px;
+}
+
+.loginModule .input_user{
+    margin: 10px 50px;
+    width: 200px;
+}
+
+.loginModule .input_passwd{
+    margin: 10px 50px;
+    width: 200px;
+}
+
+.loginModule .submit{
+    margin: 10px 50px;
+    width: 200px;
+ }

@@ -20,7 +20,7 @@
 </head>
 <body>
 <div>
-    <input id="tableData" type="hidden" value="${tableData}"/>
+    <input id="tableData" type="hidden" value="${data}"/>
 </div>
 <div>
 <table id="table_id">
