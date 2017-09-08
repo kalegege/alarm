@@ -379,6 +379,49 @@ public class AlarmController {
         return "s_hostDetailTable";
     }
 
+    @RequestMapping(value = "/getSaleDetailTable")
+    public Object getSaleDetailTable(Model model, String startDate, String stopDate, String parentId, String opId, HttpServletRequest request) throws Exception {
+
+        UserDO userDO = (UserDO) request.getSession().getAttribute("adminsession");
+
+        System.out.println("开始时间：" + startDate + "结束时间：" + stopDate + "群主id：" + opId + "发展人id：" + parentId);
+
+        //选择视图数据库
+        DataSourceContextHolder.setDataSourceType(DataSourceConst.VIRTUAL);
+        //获取当前用户权限
+        QunZhuyjDetail qunZhuyjDetail = new QunZhuyjDetail();
+        if (!opId.equals("")) {
+            if (!parentId.equals("")) {
+                //管理员
+                Long pId = Long.parseLong(parentId);
+                Long oId = Long.parseLong(opId);
+                if (pId != 0) {
+                    qunZhuyjDetail.setParentId(pId.intValue());
+                }
+                if (oId != 0) {
+                    qunZhuyjDetail.setOpId(oId.intValue());
+                }
+            } else {
+                //地推
+                Long oId = Long.parseLong(opId);
+                if (oId != 0) {
+                    qunZhuyjDetail.setOpId(oId.intValue());
+                }
+            }
+        } else {
+            //群主
+            List<User> users = userService.getUserByCode(userDO.getUserid());
+            qunZhuyjDetail.setOpId(users.get(0).getId().intValue());
+        }
+        List<QunZhuyjDetail> result = qunZhuyjDetailService.getByExamle(qunZhuyjDetail);
+        //获取全部数据
+//        List<QunZhuyjDetail> result = qunZhuyjDetailService.getAll();
+
+        model.addAttribute("data", result);
+
+        return "s_hostDetailTable";
+    }
+
     @RequestMapping(value = "getTableData")
     @ResponseBody
     public Object getTableData() throws Exception {
