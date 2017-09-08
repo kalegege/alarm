@@ -185,6 +185,7 @@ public class AlarmController {
 
         MyUtils.addJspType(model, "getHostDetailTable");
         addQunZhuAndDiTui(model, MyUtils.addModelByRole(model, role), userDO);
+        model.addAttribute(MyUtils.JSP_DATE, 1);
         return "s_table";
     }
 
@@ -207,8 +208,8 @@ public class AlarmController {
 
         // 根据权限返回值添加下拉框数据
         addQunZhuAndDiTui(model, MyUtils.addModelByRole(model, role), userDO);
-
         MyUtils.addJspType(model, "getSaleDetailTable");
+        model.addAttribute(MyUtils.JSP_DATE, 1);
         return "s_table";
     }
 

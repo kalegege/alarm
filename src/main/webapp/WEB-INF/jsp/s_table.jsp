@@ -26,7 +26,7 @@
 <div class="myMenu">
     <input type="hidden" value="${type}" id="type"/>
     <input type="hidden" value="${menu}" id="menu"/>
-    <c:if test="${menu == 1}">
+    <c:if test="${date == 1}">
         <label>开始时间</label>
         <input type="text" name="date" class="tcal" value="" id="startDate"/>
         <label>结束时间</label>

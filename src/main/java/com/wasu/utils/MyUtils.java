@@ -38,6 +38,7 @@ public class MyUtils {
     public static String JSP_MENU = "menu";
     public static String JSP_QUNZHU = "qunzhu";
     public static String JSP_DITUI = "ditui";
+    public static String JSP_DATE = "date";
 
     public static String ROLE_ADMIN="ROLE_ADMIN";
     public static String ROLE_USER="ROLE_USER";
@@ -109,33 +110,43 @@ public class MyUtils {
      */
     public static int addModelByRole(Model model, Role role) {
         int menu = 0;
+//        int ditui=0;
+//        int qunzhu=0;
+        int date=0;
 //        List<DiTuiyj> diTuiyjs = null;
 //        List<QunZhu> qunZhus = null;
 
         if (role == null) {
             //只显示时间
             menu = 1;
+            date =1;
         } else if (role.getRoleKey().equals(ROLE_USER)) {
             //群主
             menu = 2;
         } else if (role.getRoleKey().equals(ROLE_PUSH)) {
             //地推
             menu = 3;
+//            qunzhu=1;
         } else {
             //管理员
             menu = 4;
+//            ditui=1;
+//            qunzhu=1;
         }
 
         if (menu != 0) {
             model.addAttribute(JSP_MENU, menu);
         }
+        if (date != 0) {
+            model.addAttribute(JSP_DATE, date);
+        }
+//        if (qunzhu != 0) {
+//            model.addAttribute(JSP_QUNZHU, qunzhu);
+//        }
+//        if (ditui != 0) {
+//            model.addAttribute(JSP_DITUI, ditui);
+//        }
         return menu;
-//        if (diTuiyjs != null) {
-//            model.addAttribute(JSP_DITUI, diTuiyjs);
-//        }
-//        if (qunZhus != null) {
-//            model.addAttribute(JSP_DITUI, qunZhus);
-//        }
     }
 
     /**
