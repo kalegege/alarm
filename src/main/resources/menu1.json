@@ -1,0 +1,43 @@
+{
+  "id": 1,
+  "text": "统计报表",
+  "icon": "sys",
+  "children": [
+    {
+      "id": 2,
+      "text": "房间和玩家信息表",
+      "icon": "room",
+      "url": "/alarm/getRoom"
+    },
+    {
+      "id": 3,
+      "text": "登录情况按天统计表",
+      "icon": "login",
+      "url": "/alarm/getLogin"
+    },
+    {
+      "id": 4,
+      "text": "群主业绩统计表（累计）",
+      "icon": "host",
+      "url": "/alarm/getHost"
+    },
+    {
+      "id": 5,
+      "text": "地推业绩统计表（累计）",
+      "icon": "sale",
+      "url": "/alarm/getSale"
+    },
+    {
+      "id": 6,
+      "text": "群主业绩按天统计表",
+      "icon": "hostDetail",
+      "url": "/alarm/getHostDetail"
+    },
+    {
+      "id": 7,
+      "text": "地推业绩统计表（累计）",
+      "icon": "sale",
+      "url": "/alarm/getScale"
+    }
+  ]
+}

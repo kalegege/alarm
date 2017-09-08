@@ -1,0 +1,87 @@
+/*.mytable{*/
+    /*border:solid thin rgb(81, 130, 187);*/
+/*}*/
+/* Table Head */
+.mytable thead th {
+    background-color: rgb(81, 130, 187);
+    color: #fff;
+    border-bottom-width: 0;
+}
+
+/* Column Style */
+.mytable td {
+    color: #000;
+}
+/* Heading and Column Style */
+.mytable thead tr, .mytable thead th {
+    border: solid thin rgb(81, 130, 187);
+}
+
+/* Padding and font style */
+.mytable tbody td, .mytable tbody th {
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: Verdana;
+    font-weight: bold;
+    text-align:center; /*设置水平居中*/
+    vertical-align:middle;/*设置垂直居中*/
+    border: solid thin rgb(81, 130, 187);
+}
+
+.myMenu{
+    border:1px solid #000;
+    width:100%;
+    height:50px;
+}
+
+.content{
+    border-top:1px solid #000;
+    border-left:1px solid #000;
+    border-right:1px solid #000;
+    margin-top: 10px;
+    width:100%;
+    height:1100px;
+}
+
+.table{
+    /*border:1px solid #000;*/
+    /*margin-top: 10px;*/
+    /*width:100%;*/
+    /*height:400px;*/
+}
+
+
+/**
+d3样式
+*/
+.overlay{
+    fill: none;
+    pointer-events: all;
+}
+.tooltip{
+    position: absolute;
+    width:120px;
+    height: auto;
+    font-family: SimSun-ExtB;
+    font-size: 14px;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    background-color: white;
+    border-radius: 5px;
+}
+.tooltip .title{
+    border-bottom: 1px solid #000;
+    text-align: center;
+}
+
+.tooltip .desColor{
+    width:10px;
+    height:10px;
+    float:left;
+    margin:9px 8px 1px 8px;
+}
+
+.tooltip .desText{
+    display: inline;
+}

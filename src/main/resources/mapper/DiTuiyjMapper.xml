@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wasu.dao.DiTuiyjMapper" >
+  <resultMap id="BaseResultMap" type="com.wasu.model.DiTuiyj" >
+    <result column="发展人姓名" property="发展人姓名" jdbcType="VARCHAR" />
+    <result column="发展人id" property="发展人id" jdbcType="BIGINT" />
+    <result column="发展群主数量" property="发展群主数量" jdbcType="BIGINT" />
+    <result column="群主购钻数量" property="群主购钻数量" jdbcType="DECIMAL" />
+    <result column="群主被赠钻数量" property="群主被赠钻数量" jdbcType="DECIMAL" />
+    <result column="群主被调钻数量" property="群主被调钻数量" jdbcType="DECIMAL" />
+    <result column="群主划拨钻石数量" property="群主划拨钻石数量" jdbcType="DECIMAL" />
+    <result column="群主代开房消耗钻石数量" property="群主代开房消耗钻石数量" jdbcType="DECIMAL" />
+    <result column="群主当前钻石余量" property="群主当前钻石余量" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    发展人姓名, 发展人id, 发展群主数量, 群主购钻数量, 群主被赠钻数量, 群主被调钻数量, 群主划拨钻石数量, 群主代开房消耗钻石数量, 群主当前钻石余量
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wasu.model.DiTuiyjExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from v_dituiyj
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.wasu.model.DiTuiyjExample" >
+    delete from v_dituiyj
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wasu.model.DiTuiyj" >
+    insert into v_dituiyj (发展人姓名, 发展人id, 发展群主数量, 
+      群主购钻数量, 群主被赠钻数量, 群主被调钻数量, 
+      群主划拨钻石数量, 群主代开房消耗钻石数量, 群主当前钻石余量
+      )
+    values (#{发展人姓名,jdbcType=VARCHAR}, #{发展人id,jdbcType=BIGINT}, #{发展群主数量,jdbcType=BIGINT}, 
+      #{群主购钻数量,jdbcType=DECIMAL}, #{群主被赠钻数量,jdbcType=DECIMAL}, #{群主被调钻数量,jdbcType=DECIMAL}, 
+      #{群主划拨钻石数量,jdbcType=DECIMAL}, #{群主代开房消耗钻石数量,jdbcType=DECIMAL}, #{群主当前钻石余量,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wasu.model.DiTuiyj" >
+    insert into v_dituiyj
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="发展人姓名 != null" >
+        发展人姓名,
+      </if>
+      <if test="发展人id != null" >
+        发展人id,
+      </if>
+      <if test="发展群主数量 != null" >
+        发展群主数量,
+      </if>
+      <if test="群主购钻数量 != null" >
+        群主购钻数量,
+      </if>
+      <if test="群主被赠钻数量 != null" >
+        群主被赠钻数量,
+      </if>
+      <if test="群主被调钻数量 != null" >
+        群主被调钻数量,
+      </if>
+      <if test="群主划拨钻石数量 != null" >
+        群主划拨钻石数量,
+      </if>
+      <if test="群主代开房消耗钻石数量 != null" >
+        群主代开房消耗钻石数量,
+      </if>
+      <if test="群主当前钻石余量 != null" >
+        群主当前钻石余量,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="发展人姓名 != null" >
+        #{发展人姓名,jdbcType=VARCHAR},
+      </if>
+      <if test="发展人id != null" >
+        #{发展人id,jdbcType=BIGINT},
+      </if>
+      <if test="发展群主数量 != null" >
+        #{发展群主数量,jdbcType=BIGINT},
+      </if>
+      <if test="群主购钻数量 != null" >
+        #{群主购钻数量,jdbcType=DECIMAL},
+      </if>
+      <if test="群主被赠钻数量 != null" >
+        #{群主被赠钻数量,jdbcType=DECIMAL},
+      </if>
+      <if test="群主被调钻数量 != null" >
+        #{群主被调钻数量,jdbcType=DECIMAL},
+      </if>
+      <if test="群主划拨钻石数量 != null" >
+        #{群主划拨钻石数量,jdbcType=DECIMAL},
+      </if>
+      <if test="群主代开房消耗钻石数量 != null" >
+        #{群主代开房消耗钻石数量,jdbcType=DECIMAL},
+      </if>
+      <if test="群主当前钻石余量 != null" >
+        #{群主当前钻石余量,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wasu.model.DiTuiyjExample" resultType="java.lang.Integer" >
+    select count(*) from v_dituiyj
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update v_dituiyj
+    <set >
+      <if test="record.发展人姓名 != null" >
+        发展人姓名 = #{record.发展人姓名,jdbcType=VARCHAR},
+      </if>
+      <if test="record.发展人id != null" >
+        发展人id = #{record.发展人id,jdbcType=BIGINT},
+      </if>
+      <if test="record.发展群主数量 != null" >
+        发展群主数量 = #{record.发展群主数量,jdbcType=BIGINT},
+      </if>
+      <if test="record.群主购钻数量 != null" >
+        群主购钻数量 = #{record.群主购钻数量,jdbcType=DECIMAL},
+      </if>
+      <if test="record.群主被赠钻数量 != null" >
+        群主被赠钻数量 = #{record.群主被赠钻数量,jdbcType=DECIMAL},
+      </if>
+      <if test="record.群主被调钻数量 != null" >
+        群主被调钻数量 = #{record.群主被调钻数量,jdbcType=DECIMAL},
+      </if>
+      <if test="record.群主划拨钻石数量 != null" >
+        群主划拨钻石数量 = #{record.群主划拨钻石数量,jdbcType=DECIMAL},
+      </if>
+      <if test="record.群主代开房消耗钻石数量 != null" >
+        群主代开房消耗钻石数量 = #{record.群主代开房消耗钻石数量,jdbcType=DECIMAL},
+      </if>
+      <if test="record.群主当前钻石余量 != null" >
+        群主当前钻石余量 = #{record.群主当前钻石余量,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update v_dituiyj
+    set 发展人姓名 = #{record.发展人姓名,jdbcType=VARCHAR},
+      发展人id = #{record.发展人id,jdbcType=BIGINT},
+      发展群主数量 = #{record.发展群主数量,jdbcType=BIGINT},
+      群主购钻数量 = #{record.群主购钻数量,jdbcType=DECIMAL},
+      群主被赠钻数量 = #{record.群主被赠钻数量,jdbcType=DECIMAL},
+      群主被调钻数量 = #{record.群主被调钻数量,jdbcType=DECIMAL},
+      群主划拨钻石数量 = #{record.群主划拨钻石数量,jdbcType=DECIMAL},
+      群主代开房消耗钻石数量 = #{record.群主代开房消耗钻石数量,jdbcType=DECIMAL},
+      群主当前钻石余量 = #{record.群主当前钻石余量,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

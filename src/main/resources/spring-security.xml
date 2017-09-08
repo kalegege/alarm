@@ -1,0 +1,38 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="
+            http://www.springframework.org/schema/security
+            http://www.springframework.org/schema/security/spring-security-4.0.xsd
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+    <http auto-config="true">
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/alarm/**" access="hasRole('ADMIN')"/>
+        <!--<intercept-url pattern="/dba**" access="hasRole('ADMIN') and hasRole('DBA')"/>-->
+        <intercept-url pattern="/**" access="permitAll"/>
+        <!--<form-login login-page="/login" username-parameter="ssoId" password-parameter="password"-->
+        <!--authentication-failure-url="/Access_Denied"/>-->
+        <!--<csrf/>-->
+    </http>
+    <!-- 查询网上的文章，这里都是引用的实现了UserDetailsService的类，但是我引用的时候提示UserDetailService不能转为org.springframework.security.authentication.AuthenticationProvider，所以这里需要改为实现了AuthenticationProvider的类 -->
+    <beans:bean id="MyUserService" class="com.wasu.security.SecurityProvider"></beans:bean>
+
+    <beans:bean id="MyUserDetailService" class="com.wasu.security.MyUserDetailService"></beans:bean>
+
+    <authentication-manager>
+        <authentication-provider user-service-ref="MyUserDetailService">
+            <password-encoder hash="sha-256"/>
+        </authentication-provider>
+        <!--<authentication-provider>-->
+        <!--<user-service>-->
+        <!--<user name="bill" password="abc123" authorities="ROLE_USER"/>-->
+        <!--<user name="admin" password="root123" authorities="ROLE_ADMIN"/>-->
+        <!--<user name="dba" password="root123" authorities="ROLE_ADMIN,ROLE_DBA"/>-->
+        <!--</user-service>-->
+        <!--</authentication-provider>-->
+    </authentication-manager>
+
+
+</beans:beans>
