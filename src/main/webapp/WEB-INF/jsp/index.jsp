@@ -20,7 +20,10 @@
 <body>
 <h1>推广人员统计表</h1>
 <input type="hidden" value="<%=basePath%>" id="basePath"/>
-
+<div>
+    <%--<input class="logout"  value="退出登录">--%>
+    <a class="logout" href="<%=basePath%>logout">退出登录</a>
+</div>
 <script type="text/javascript">
     $(function () {
         BXUI.load("portal");

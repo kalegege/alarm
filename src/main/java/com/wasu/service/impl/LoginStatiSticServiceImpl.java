@@ -30,8 +30,8 @@ public class LoginStatiSticServiceImpl implements LoginStatisticDateService {
 
     @Override
     public List<LoginStatisticDate> getAll() {
-        LoginStatisticDateExample loginStatisticDateExample =new LoginStatisticDateExample();
-        LoginStatisticDateExample.Criteria criteria=loginStatisticDateExample.createCriteria();
+        LoginStatisticDateExample loginStatisticDateExample = new LoginStatisticDateExample();
+        LoginStatisticDateExample.Criteria criteria = loginStatisticDateExample.createCriteria();
         loginStatisticDateExample.setOrderByClause("login_date DESC");
         return loginStatisticDateMapper.selectByExample(loginStatisticDateExample);
     }
@@ -39,12 +39,13 @@ public class LoginStatiSticServiceImpl implements LoginStatisticDateService {
     @Override
     public List<LoginStatisticDate> getCertainTime(String start, String stop) {
 
-        LoginStatisticDateExample loginStatisticDateExample =new LoginStatisticDateExample();
-        LoginStatisticDateExample.Criteria criteria=loginStatisticDateExample.createCriteria();
+        LoginStatisticDateExample loginStatisticDateExample = new LoginStatisticDateExample();
+        LoginStatisticDateExample.Criteria criteria = loginStatisticDateExample.createCriteria();
         //解析日期
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate start1= LocalDate.parse(start, formatter);
-        LocalDate stop1= LocalDate.parse(stop, formatter);
+        LocalDate start1 = LocalDate.parse(start, formatter);
+        start1 = start1.minusDays(1);
+        LocalDate stop1 = LocalDate.parse(stop, formatter);
 
         ZoneId zoneId = ZoneId.systemDefault();
         ZonedDateTime zdt1 = start1.atStartOfDay(zoneId);

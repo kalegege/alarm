@@ -64,7 +64,7 @@ public class LoginController {
     @RequestMapping(value = "/login")
     public Object login(@ModelAttribute("form") UserDO userDO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        String kaptchaExpected = (String)request.getSession()
+        String kaptchaExpected = (String) request.getSession()
                 .getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 
         DataSourceContextHolder.setDataSourceType(DataSourceConst.VIRTUAL);
@@ -77,11 +77,26 @@ public class LoginController {
             return "login1";
         }
 
-        System.out.println(userDO.getPasswd());
+//        System.out.println(userDO.getPasswd());
         HttpSession session = request.getSession();
-        session.setAttribute("adminsession", userDO);
-        session.setMaxInactiveInterval(2 * 60);
+        session.setAttribute(MyUtils.SESSION_USER, userDO);
+        session.setMaxInactiveInterval(7 * 24 * 60 * 60);
         return "index";
+    }
+
+    /**
+     * 退出登录
+     *
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/logout")
+    public Object logout(HttpServletRequest request) throws Exception {
+
+        HttpSession session = request.getSession();
+        session.removeAttribute("adminsession");
+        return "login1";
     }
 
     /**

@@ -279,6 +279,8 @@ public class AlarmController {
                 }
             } else {
                 //地推
+                Long pId = userService.getUserByCode(userDO.getUserid()).get(0).getId();
+                qunZhuyj.set发展人id(pId);
                 Long oId = Long.parseLong(opId);
                 if (oId != 0) {
                     qunZhuyj.set群主id(oId);
@@ -361,6 +363,8 @@ public class AlarmController {
                 }
             } else {
                 //地推
+                Long pId = userService.getUserByCode(userDO.getUserid()).get(0).getId();
+                qunZhuyjDetail.setParentId(pId.intValue());
                 Long oId = Long.parseLong(opId);
                 if (oId != 0) {
                     qunZhuyjDetail.setOpId(oId.intValue());
@@ -371,7 +375,7 @@ public class AlarmController {
             List<User> users = userService.getUserByCode(userDO.getUserid());
             qunZhuyjDetail.setOpId(users.get(0).getId().intValue());
         }
-        List<QunZhuyjDetail> result = qunZhuyjDetailService.getByExamleAndDate(qunZhuyjDetail,startDate,stopDate);
+        List<QunZhuyjDetail> result = qunZhuyjDetailService.getByExamleAndDate(qunZhuyjDetail, startDate, stopDate);
         //获取全部数据
 //        List<QunZhuyjDetail> result = qunZhuyjDetailService.getAll();
 
@@ -404,6 +408,8 @@ public class AlarmController {
                 }
             } else {
                 //地推
+                Long pId = userService.getUserByCode(userDO.getUserid()).get(0).getId();
+                qunZhuyjDetail.setParentId(pId.intValue());
                 Long oId = Long.parseLong(opId);
                 if (oId != 0) {
                     qunZhuyjDetail.setOpId(oId.intValue());
@@ -414,7 +420,7 @@ public class AlarmController {
             List<User> users = userService.getUserByCode(userDO.getUserid());
             qunZhuyjDetail.setOpId(users.get(0).getId().intValue());
         }
-        List<QunZhuyjDetail> result = qunZhuyjDetailService.getByExamleAndDate(qunZhuyjDetail,startDate,stopDate);
+        List<QunZhuyjDetail> result = qunZhuyjDetailService.getByExamleAndDate(qunZhuyjDetail, startDate, stopDate);
         //获取全部数据
 //        List<QunZhuyjDetail> result = qunZhuyjDetailService.getAll();
 

@@ -111,3 +111,9 @@ d3样式
     margin: 10px 50px;
     width: 200px;
  }
+
+.logout {
+    float: right;
+    margin-right: 0px;
+    margin-top: -18px;
+}

@@ -24,16 +24,6 @@ import org.springframework.ui.Model;
  */
 public class MyUtils {
     private static Logger logger = Logger.getLogger(MyUtils.class.getName());
-
-    @Autowired
-    private QunZhuyjService qunZhuyjService;
-
-    @Autowired
-    private DiTuiyjService diTuiyjService;
-
-    @Autowired
-    private RoleService roleService;
-
     public static String JSP_TYPE = "type";
     public static String JSP_MENU = "menu";
     public static String JSP_QUNZHU = "qunzhu";
@@ -45,6 +35,19 @@ public class MyUtils {
     public static String ROLE_PUSH="ROLE_PUSH";
     public static String ROLE_RESTRICTED_ADMIN="ROLE_RESTRICTED_ADMIN";
     public static String ROLE_SERV="ROLE_SERV";
+
+    public static String SESSION_USER="adminsession";
+
+    @Autowired
+    private QunZhuyjService qunZhuyjService;
+
+    @Autowired
+    private DiTuiyjService diTuiyjService;
+
+    @Autowired
+    private RoleService roleService;
+
+
 
 
     /***

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
  * Created by kale on 2017/8/23.
  */
 public class CommonInterceptor implements HandlerInterceptor {
-    private final String ADMINSESSION = "adminsession";
 
     //拦截前处理
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
@@ -31,8 +30,8 @@ public class CommonInterceptor implements HandlerInterceptor {
 
 
         HttpSession session=request.getSession();
-        Object sessionObj = session.getAttribute(ADMINSESSION);
-        session.setMaxInactiveInterval(7*24*60*60);
+        Object sessionObj = session.getAttribute(MyUtils.SESSION_USER);
+
         if (sessionObj != null) {
             return true;
         }

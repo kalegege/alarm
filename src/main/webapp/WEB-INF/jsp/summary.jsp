@@ -7,13 +7,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mystyle.css" type="text/css" charset="utf-8"/>
-
-
+    <meta http-equiv="refresh" content="60" url="<%=basePath%>getRoom">
 </head>
 <body>
+<div>
+    <button onclick="refresh()">刷新</button>
+</div>
     <table class="mytable">
         <thead>
         <tr>
@@ -30,6 +36,11 @@
         </tr>
         </tbody>
     </table>
+<script language="JavaScript">
+    function refresh() {
+        window.location.reload();
+    }
+</script>
 
 </body>
 </html>

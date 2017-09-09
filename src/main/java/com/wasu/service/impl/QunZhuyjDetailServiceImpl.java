@@ -20,7 +20,7 @@ import java.util.List;
  * Created by kale on 2017/8/24.
  */
 @Service("QunZhuyjDetailService")
-public class QunZhuyjDetailServiceImpl implements QunZhuyjDetailService{
+public class QunZhuyjDetailServiceImpl implements QunZhuyjDetailService {
     private static Logger logger = Logger.getLogger(QunZhuyjDetailServiceImpl.class.getName());
 
     @Resource
@@ -28,19 +28,19 @@ public class QunZhuyjDetailServiceImpl implements QunZhuyjDetailService{
 
     @Override
     public List<QunZhuyjDetail> getAll() {
-        QunZhuyjDetailExample qunZhuyjDetailExample=new QunZhuyjDetailExample();
-        QunZhuyjDetailExample.Criteria criteria=qunZhuyjDetailExample.createCriteria();
+        QunZhuyjDetailExample qunZhuyjDetailExample = new QunZhuyjDetailExample();
+        QunZhuyjDetailExample.Criteria criteria = qunZhuyjDetailExample.createCriteria();
         return qunZhuyjDetailMapper.selectByExample(qunZhuyjDetailExample);
     }
 
     @Override
     public List<QunZhuyjDetail> getByExamle(QunZhuyjDetail obj) {
-        QunZhuyjDetailExample qunZhuyjDetailExample=new QunZhuyjDetailExample();
-        QunZhuyjDetailExample.Criteria criteria=qunZhuyjDetailExample.createCriteria();
-        if(obj.getOpId()!= null){
+        QunZhuyjDetailExample qunZhuyjDetailExample = new QunZhuyjDetailExample();
+        QunZhuyjDetailExample.Criteria criteria = qunZhuyjDetailExample.createCriteria();
+        if (obj.getOpId() != null) {
             criteria.andOpIdEqualTo(obj.getOpId());
         }
-        if(obj.getParentId()!=null){
+        if (obj.getParentId() != null) {
             criteria.andParentIdEqualTo(obj.getParentId());
         }
         return qunZhuyjDetailMapper.selectByExample(qunZhuyjDetailExample);
@@ -48,18 +48,19 @@ public class QunZhuyjDetailServiceImpl implements QunZhuyjDetailService{
 
     @Override
     public List<QunZhuyjDetail> getByExamleAndDate(QunZhuyjDetail qunZhuyjDetail, String start, String stop) {
-        QunZhuyjDetailExample qunZhuyjDetailExample=new QunZhuyjDetailExample();
-        QunZhuyjDetailExample.Criteria criteria=qunZhuyjDetailExample.createCriteria();
-        if(qunZhuyjDetail.getOpId()!= null){
+        QunZhuyjDetailExample qunZhuyjDetailExample = new QunZhuyjDetailExample();
+        QunZhuyjDetailExample.Criteria criteria = qunZhuyjDetailExample.createCriteria();
+        if (qunZhuyjDetail.getOpId() != null) {
             criteria.andOpIdEqualTo(qunZhuyjDetail.getOpId());
         }
-        if(qunZhuyjDetail.getParentId()!=null){
+        if (qunZhuyjDetail.getParentId() != null) {
             criteria.andParentIdEqualTo(qunZhuyjDetail.getParentId());
         }
         //解析日期
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate start1= LocalDate.parse(start, formatter);
-        LocalDate stop1= LocalDate.parse(stop, formatter);
+        LocalDate start1 = LocalDate.parse(start, formatter);
+        start1 = start1.minusDays(1);
+        LocalDate stop1 = LocalDate.parse(stop, formatter);
 
         ZoneId zoneId = ZoneId.systemDefault();
         ZonedDateTime zdt1 = start1.atStartOfDay(zoneId);
