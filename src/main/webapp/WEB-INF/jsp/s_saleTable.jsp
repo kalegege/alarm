@@ -23,7 +23,7 @@
     <input id="tableData" type="hidden" value="${tableData}"/>
 </div>
 <div>
-<table id="table_id">
+<table id="saleTable">
     <thead>
     <tr>
         <th>发展人姓名</th>
@@ -60,7 +60,7 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $('#table_id').DataTable({
+        $('#saleTable').DataTable({
             language: {
                 "sProcessing": "处理中...",
                 "sLengthMenu": "显示 _MENU_ 项结果",

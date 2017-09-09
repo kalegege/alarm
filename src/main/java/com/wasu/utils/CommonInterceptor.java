@@ -32,7 +32,7 @@ public class CommonInterceptor implements HandlerInterceptor {
 
         HttpSession session=request.getSession();
         Object sessionObj = session.getAttribute(ADMINSESSION);
-        session.setMaxInactiveInterval(2*60);
+        session.setMaxInactiveInterval(7*24*60*60);
         if (sessionObj != null) {
             return true;
         }

@@ -23,7 +23,7 @@
     <input id="tableData" type="hidden" value="${tableData}"/>
 </div>
 <div>
-<table id="table_id">
+<table id="hostDetailTable">
     <thead>
     <tr>
         <th>id</th>
@@ -68,7 +68,7 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $('#table_id').DataTable({
+        $('#hostDetailTable').DataTable({
             language: {
                 "sProcessing": "处理中...",
                 "sLengthMenu": "显示 _MENU_ 项结果",

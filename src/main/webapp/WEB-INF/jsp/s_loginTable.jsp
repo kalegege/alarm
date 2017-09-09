@@ -23,7 +23,7 @@
     <input id="tableData" type="hidden" value="${data}"/>
 </div>
 <div>
-<table id="table_id">
+<table id="loginTable">
     <thead>
     <tr>
         <th>日期</th>
@@ -50,7 +50,7 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $('#table_id').DataTable({
+        $('#loginTable').DataTable({
             language: {
                 "sProcessing": "处理中...",
                 "sLengthMenu": "显示 _MENU_ 项结果",
