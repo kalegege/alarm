@@ -26,10 +26,20 @@
             <div>
                 <input class="input_passwd" name="passwd" type="password" placeholder="密码">
             </div>
+            <%--<div>--%>
+                <%--<image src="<%=basePath%>code" id="identity" onload="btn.disable=false" style="margin-left: 50px;"></image>--%>
+                <%--<input type="button" value="看不清，更换验证码" onclick="changeImageCode()" id="btn">--%>
+            <%--</div>--%>
             <div>
                 <input class="submit" type="submit" value="登录">
             </div>
         </form>
 </div>
+<script>
+    function changeImageCode() {
+        document.getElementById('btn').isDisabled=true;
+        document.getElementById('identity').src='<%=basePath%>code?ts='+new Date().getTime();
+    }
+</script>
 </body>
 </html>

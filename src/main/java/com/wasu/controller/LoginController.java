@@ -7,25 +7,25 @@ import com.wasu.model.Menu;
 import com.wasu.model.UserDO;
 import com.wasu.service.AuthorityService;
 import com.wasu.service.UserService;
-import com.wasu.utils.CommonInterceptor;
 import com.wasu.utils.DataSourceConst;
 import com.wasu.utils.DataSourceContextHolder;
 import com.wasu.utils.MyUtils;
-import org.apache.commons.collections.FastArrayList;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.Cookie;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by kale on 2017/8/23.
@@ -95,8 +95,37 @@ public class LoginController {
     public Object logout(HttpServletRequest request) throws Exception {
 
         HttpSession session = request.getSession();
-        session.removeAttribute("adminsession");
+        session.removeAttribute(MyUtils.SESSION_USER);
         return "login1";
+    }
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/code")
+    public void code(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        int width=100;
+        int height=30;
+        String strs="abcdefghijklmnopqrstuvwxyz0123456789";
+        Random random=new Random();
+        BufferedImage image=new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+
+        Graphics graphics=image.getGraphics();
+        graphics.setColor(Color.gray);
+        graphics.fillRect(0,0,100,30);
+        graphics.setColor(Color.BLUE);
+
+        for(int i=0;i<4;i++){
+            int position=random.nextInt(strs.length());
+            graphics.drawString(strs.substring(position,position+1),20*(i+1),15);
+        }
+
+        ImageIO.write(image,"jpg",response.getOutputStream());
+
     }
 
     /**
@@ -105,7 +134,7 @@ public class LoginController {
     @RequestMapping(value = "/menu")
     @ResponseBody
     public Object menu(HttpServletRequest request) throws Exception {
-        UserDO userDO = (UserDO) request.getSession().getAttribute("adminsession");
+        UserDO userDO = (UserDO) request.getSession().getAttribute(MyUtils.SESSION_USER);
 
         DataSourceContextHolder.setDataSourceType(DataSourceConst.VIRTUAL);
 
