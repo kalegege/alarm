@@ -26,7 +26,7 @@
 <div class="myMenu">
     <input type="hidden" value="${type}" id="type"/>
     <input type="hidden" value="${menu}" id="menu"/>
-    <c:if test="${menu == 1}">
+    <c:if test="${date == 1}">
         <label>开始时间</label>
         <input type="text" name="date" class="tcal" value="" id="startDate"/>
         <label>结束时间</label>
@@ -41,14 +41,14 @@
             </c:forEach>
         </select>
     </c:if>
-    <button onclick="searchDetail()" <c:if test="${menu == 2}"> style="display:none" </c:if>>查询</button>
+    <button onclick="searchDetail()" <c:if test="${menu == 3}"> style="display:none" </c:if>>查询</button>
 </div>
 <div class="content"></div>
 <script type="application/javascript">
     formInit();
 //    addChangeAction();
 </script>
-<c:if test="${menu == 2}">
+<c:if test="${menu == 3}">
     <script type="application/javascript">
         searchDetail();
     </script>

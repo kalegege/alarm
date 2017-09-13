@@ -1,7 +1,7 @@
 package com.wasu.service;
 
 import com.wasu.model.QunZhuyjDetail;
-import com.wasu.model.QunZhuyjDetailExample;
+import com.wasu.model.QunZhuyjGroupDetail;
 
 import java.util.List;
 
@@ -14,4 +14,7 @@ public interface QunZhuyjDetailService {
     List<QunZhuyjDetail> getByExamle(QunZhuyjDetail qunZhuyjDetail);
 
     List<QunZhuyjDetail> getByExamleAndDate(QunZhuyjDetail qunZhuyjDetail,String start,String stop);
+
+    List<QunZhuyjGroupDetail> getByExamleAndDateGroup(QunZhuyjDetail qunZhuyjDetail, String start, String stop);
+
 }

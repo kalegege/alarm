@@ -203,7 +203,7 @@ public class AlarmController {
         addQunZhuAndDiTui(model, MyUtils.addModelByRole(model, role), userDO);
         MyUtils.addJspType(model, "getSaleDetailTable");
         model.addAttribute(MyUtils.JSP_DATE, 1);
-        return "s_table";
+        return "s_dtable";
     }
 
     /**
@@ -301,7 +301,7 @@ public class AlarmController {
      */
     @RequestMapping(value = "getSaleTable")
     public Object getSaleTable(Model model, String startDate, String stopDate, String parentId, String opId, HttpServletRequest request) throws Exception {
-        UserDO userDO = (UserDO) request.getSession().getAttribute("adminsession");
+        UserDO userDO = (UserDO) request.getSession().getAttribute(MyUtils.SESSION_USER);
         //选择视图数据库
         DataSourceContextHolder.setDataSourceType(DataSourceConst.VIRTUAL);
 
@@ -386,40 +386,41 @@ public class AlarmController {
 
         //选择视图数据库
         DataSourceContextHolder.setDataSourceType(DataSourceConst.VIRTUAL);
+
         //获取当前用户权限
+        Role role = roleService.getRoleByUserId(userDO.getUserid());
         QunZhuyjDetail qunZhuyjDetail = new QunZhuyjDetail();
-        if (!opId.equals("")) {
-            if (!parentId.equals("")) {
-                //管理员
-                Long pId = Long.parseLong(parentId);
-                Long oId = Long.parseLong(opId);
-                if (pId != 0) {
-                    qunZhuyjDetail.setParentId(pId.intValue());
-                }
-                if (oId != 0) {
-                    qunZhuyjDetail.setOpId(oId.intValue());
-                }
-            } else {
-                //地推
-                Long pId = userService.getUserByCode(userDO.getUserid()).get(0).getId();
-                qunZhuyjDetail.setParentId(pId.intValue());
-                Long oId = Long.parseLong(opId);
-                if (oId != 0) {
-                    qunZhuyjDetail.setOpId(oId.intValue());
-                }
-            }
-        } else {
+
+        if (role.getRoleKey().equals(MyUtils.ROLE_USER)) {
             //群主
             List<User> users = userService.getUserByCode(userDO.getUserid());
             qunZhuyjDetail.setOpId(users.get(0).getId().intValue());
+        } else if (role.getRoleKey().equals(MyUtils.ROLE_PUSH)) {
+            //地推
+            Long pId = userService.getUserByCode(userDO.getUserid()).get(0).getId();
+            qunZhuyjDetail.setParentId(pId.intValue());
+            Long oId = Long.parseLong(opId);
+            if (oId != 0) {
+                qunZhuyjDetail.setOpId(oId.intValue());
+            }
+        } else {
+            //管理员
+            Long pId = parentId != "" ? Long.parseLong(parentId) : 0;
+            Long oId = opId != "" ? Long.parseLong(opId) : 0;
+            if (pId != 0) {
+                qunZhuyjDetail.setParentId(pId.intValue());
+            }
+            if (oId != 0) {
+                qunZhuyjDetail.setOpId(oId.intValue());
+            }
         }
-        List<QunZhuyjDetail> result = qunZhuyjDetailService.getByExamleAndDate(qunZhuyjDetail, startDate, stopDate);
+        List<QunZhuyjGroupDetail> result = qunZhuyjDetailService.getByExamleAndDateGroup(qunZhuyjDetail, startDate, stopDate);
         //获取全部数据
 //        List<QunZhuyjDetail> result = qunZhuyjDetailService.getAll();
 
         model.addAttribute("data", result);
 
-        return "s_hostDetailTable";
+        return "s_saleDetailTable";
     }
 
     @RequestMapping(value = "getTableData")

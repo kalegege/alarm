@@ -1,9 +1,9 @@
 package com.wasu.service.impl;
 
-import com.wasu.dao.LoginStatisticDateMapper;
 import com.wasu.dao.QunZhuyjDetailMapper;
 import com.wasu.model.QunZhuyjDetail;
 import com.wasu.model.QunZhuyjDetailExample;
+import com.wasu.model.QunZhuyjGroupDetail;
 import com.wasu.service.QunZhuyjDetailService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -48,6 +48,12 @@ public class QunZhuyjDetailServiceImpl implements QunZhuyjDetailService {
 
     @Override
     public List<QunZhuyjDetail> getByExamleAndDate(QunZhuyjDetail qunZhuyjDetail, String start, String stop) {
+        QunZhuyjDetailExample qunZhuyjDetailExample = addParams(qunZhuyjDetail, start, stop);
+
+        return qunZhuyjDetailMapper.selectByExample(qunZhuyjDetailExample);
+    }
+
+    private QunZhuyjDetailExample addParams(QunZhuyjDetail qunZhuyjDetail, String start, String stop) {
         QunZhuyjDetailExample qunZhuyjDetailExample = new QunZhuyjDetailExample();
         QunZhuyjDetailExample.Criteria criteria = qunZhuyjDetailExample.createCriteria();
         if (qunZhuyjDetail.getOpId() != null) {
@@ -69,13 +75,14 @@ public class QunZhuyjDetailServiceImpl implements QunZhuyjDetailService {
         ZonedDateTime zdt2 = stop1.atStartOfDay(zoneId);
         Date stop2 = Date.from(zdt2.toInstant());
 
-//        Date star21= (Date) DateTimeFormatter.ofPattern("%Y-%m-%d").parse(start);
-//        Date start1=new Date(start);
-//        Date stop1=new Date(stop);
         criteria.andOpDateGreaterThan(start2).andOpDateLessThan(stop2);
-//        criteria.andLoginDateBetween(start2,stop2);
         qunZhuyjDetailExample.setOrderByClause("op_date DESC");
+        return qunZhuyjDetailExample;
+    }
 
-        return qunZhuyjDetailMapper.selectByExample(qunZhuyjDetailExample);
+    @Override
+    public List<QunZhuyjGroupDetail> getByExamleAndDateGroup(QunZhuyjDetail qunZhuyjDetail, String start, String stop) {
+        QunZhuyjDetailExample qunZhuyjDetailExample = addParams(qunZhuyjDetail, start, stop);
+        return qunZhuyjDetailMapper.getByExamleAndDateGroup(qunZhuyjDetailExample);
     }
 }

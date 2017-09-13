@@ -2,8 +2,10 @@ package com.wasu.dao;
 
 import com.wasu.model.QunZhuyjDetail;
 import com.wasu.model.QunZhuyjDetailExample;
-import java.util.List;
+import com.wasu.model.QunZhuyjGroupDetail;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface QunZhuyjDetailMapper {
     int countByExample(QunZhuyjDetailExample example);
@@ -17,6 +19,8 @@ public interface QunZhuyjDetailMapper {
     int insertSelective(QunZhuyjDetail record);
 
     List<QunZhuyjDetail> selectByExample(QunZhuyjDetailExample example);
+
+    List<QunZhuyjGroupDetail> getByExamleAndDateGroup(QunZhuyjDetailExample example);
 
     QunZhuyjDetail selectByPrimaryKey(Integer id);
 

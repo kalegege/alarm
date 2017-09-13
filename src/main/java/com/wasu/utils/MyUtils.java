@@ -1,23 +1,25 @@
 package com.wasu.utils;
 
-import com.wasu.controller.AlarmController;
-import com.wasu.model.*;
+import com.wasu.model.Item;
+import com.wasu.model.Menu;
+import com.wasu.model.Role;
 import com.wasu.service.DiTuiyjService;
 import com.wasu.service.QunZhuyjService;
 import com.wasu.service.RoleService;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONException;
-import org.apache.commons.codec.binary.Hex;
-
-import java.io.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-
 import net.sf.json.JSONObject;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * Created by kale on 2017/8/28.
@@ -143,12 +145,6 @@ public class MyUtils {
         if (date != 0) {
             model.addAttribute(JSP_DATE, date);
         }
-//        if (qunzhu != 0) {
-//            model.addAttribute(JSP_QUNZHU, qunzhu);
-//        }
-//        if (ditui != 0) {
-//            model.addAttribute(JSP_DITUI, ditui);
-//        }
         return menu;
     }
 

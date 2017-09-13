@@ -16,6 +16,18 @@
     <result column="openroo_num" property="openrooNum" jdbcType="INTEGER" />
     <result column="remaining_num" property="remainingNum" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="GroupResultMap" type="com.wasu.model.QunZhuyjGroupDetail" >
+    <result column="日期" property="日期" jdbcType="DATE" />
+    <result column="发展人姓名" property="发展人姓名" jdbcType="VARCHAR" />
+    <result column="发展人id" property="发展人id" jdbcType="INTEGER" />
+    <result column="发展群主数量" property="发展群主数量" jdbcType="INTEGER" />
+    <result column="群主购钻数量" property="群主购钻数量" jdbcType="INTEGER" />
+    <result column="群主被赠钻数量" property="群主被赠钻数量" jdbcType="INTEGER" />
+    <result column="群主被调钻数量" property="群主被调钻数量" jdbcType="INTEGER" />
+    <result column="群主划拨钻石数量" property="群主划拨钻石数量" jdbcType="INTEGER" />
+    <result column="群主代开房消耗钻石数量" property="群主代开房消耗钻石数量" jdbcType="INTEGER" />
+    <result column="群主当前钻石余量" property="群主当前钻石余量" jdbcType="INTEGER" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -78,6 +90,10 @@
     id, op_date, op_id, op_name, reg_time, parent_id, parent_name, trade_num, discount_num, 
     adjustment_num, transfer_num, openroo_num, remaining_num
   </sql>
+  <sql id="Group_Column_List" >
+    id, op_date, parent_id, parent_name, trade_num, discount_num,
+    adjustment_num, transfer_num, openroo_num, remaining_num
+  </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wasu.model.QunZhuyjDetailExample" >
     select
     <if test="distinct" >
@@ -91,6 +107,24 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+  </select>
+  <select id="getByExamleAndDateGroup" resultMap="GroupResultMap" parameterType="com.wasu.model.QunZhuyjDetailExample" >
+    select
+    a.`op_date` 日期,
+    a.`parent_name` 发展人姓名,
+    a.`parent_id` 发展人id,
+    count(a.`op_id`)  发展群主数量,
+    ifnull(sum(a.`trade_num`),0) 群主购钻数量,
+    ifnull(sum(a.`discount_num`),0) 群主被赠钻数量,
+    ifnull(sum(a.`adjustment_num`),0) 群主被调钻数量,
+    ifnull(sum(a.`transfer_num`),0) 群主划拨钻石数量,
+    ifnull(sum(a.`openroo_num`),0) 群主代开房消耗钻石数量,
+    ifnull(sum(a.`remaining_num`),0) 群主当前钻石余量
+    from jt_qunzhuyj_date a
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    group by   a.`op_date`,a.`parent_id`
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
