@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>shiro安全配置</description>
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:redis.properties"/>
+    </bean>
+
+    <bean id="userFormAuthenticationFilter" class="shiro.UserFormAuthenticationFilter"/>
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login.do"/>
+        <property name="successUrl" value="/main.do"/>
+        <property name="filters">
+            <map>
+                <entry key="authc" value-ref="userFormAuthenticationFilter"/>
+            </map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /login.do = authc
+                /= authc
+            </value>
+        </property>
+    </bean>
+    <!--ehcache -->
+    <bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"></property>
+    </bean>
+
+    <!-- Shiro security manager -->
+    <bean id="systemAuthorizingRealm" class="shiro.SystemAuthorizingRealm"></bean>
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="systemAuthorizingRealm"/>
+        <property name="cacheManager" ref="shiroEhcacheManager"/>
+        <!--<property name="sessionManager" ref="sessionManager"/>-->
+    </bean>
+
+
+
+</beans>
