@@ -85,11 +85,14 @@ public class AlarmController {
         }
 
         //选择视图数据库
-        DataSourceContextHolder.setDataSourceType(DataSourceConst.TABLE);
-
-        int players = roomService.getOnlinePlayers(today);
-        int onlineRooms = roomService.getOnlineRooms(today);
-        int waitRooms = roomService.getWaitRooms(today);
+//        DataSourceContextHolder.setDataSourceType(DataSourceConst.TABLE);
+//
+//        int players = roomService.getOnlinePlayers(today);
+//        int onlineRooms = roomService.getOnlineRooms(today);
+//        int waitRooms = roomService.getWaitRooms(today);
+        int players = 100;
+        int onlineRooms = 200;
+        int waitRooms = 300;
 
         System.out.println("当前在线玩家有" + players);
         System.out.println("当前在线房间数有" + onlineRooms);

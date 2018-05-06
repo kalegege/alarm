@@ -69,19 +69,19 @@ public class LoginController {
 
         DataSourceContextHolder.setDataSourceType(DataSourceConst.VIRTUAL);
 
-        if (userDO.getUserid() == null) {
-            return "login1";
-        }
-        if (!userService.isProved(userDO)) {
-            System.out.println("密码错误");
-            return "login1";
-        }
+//        if (userDO.getUserid() == null) {
+//            return "login1";
+//        }
+//        if (!userService.isProved(userDO)) {
+//            System.out.println("密码错误");
+//            return "login1";
+//        }
 
 //        System.out.println(userDO.getPasswd());
         HttpSession session = request.getSession();
         session.setAttribute(MyUtils.SESSION_USER, userDO);
         session.setMaxInactiveInterval(7 * 24 * 60 * 60);
-        return "index";
+        return "test1";
     }
 
     /**
@@ -138,7 +138,25 @@ public class LoginController {
 
         DataSourceContextHolder.setDataSourceType(DataSourceConst.VIRTUAL);
 
-        List<Authority> menuByUserId = authorityService.getMenuByUserId(userDO.getUserid());
+//        List<Authority> menuByUserId = authorityService.getMenuByUserId(userDO.getUserid());
+        List<Authority> menuByUserId =new ArrayList<>();
+        Authority item=new Authority();
+        item.setMenuName("推荐位配置");
+        item.setMenuCode("001");
+        item.setSequence(1);
+        item.setMenuUrl("alarm/getRoom");
+        item.setMenuType(0);
+
+        menuByUserId.add(item);
+        Authority item2=new Authority();
+        item2.setMenuName("推荐内容配置");
+        item2.setMenuCode("001");
+        item2.setSequence(1);
+        item2.setMenuUrl("actor/test1");
+        item2.setMenuType(0);
+        item2.setParentMenucode("001");
+        item2.setMenuType(1);
+        menuByUserId.add(item2);
 
         List<Menu> menus = new ArrayList<Menu>();
         for (int i = 0; i < menuByUserId.size(); i++) {
