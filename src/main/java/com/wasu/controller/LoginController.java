@@ -81,7 +81,7 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.setAttribute(MyUtils.SESSION_USER, userDO);
         session.setMaxInactiveInterval(7 * 24 * 60 * 60);
-        return "test1";
+        return "actor/index";
     }
 
     /**

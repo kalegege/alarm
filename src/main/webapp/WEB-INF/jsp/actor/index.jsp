@@ -16,7 +16,7 @@
     <script src="${pageContext.request.contextPath}/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="${pageContext.request.contextPath}/js/jquery.easyui.min.js" type="text/javascript" charset="utf-8"></script>
     <%--<script src="${pageContext.request.contextPath}/js/index.js" type="text/javascript" charset="utf-8"></script>--%>
-    <title>easyui基本框架搭建</title>
+    <title>艺人推荐系统管理后台</title>
 </head>
 
 <body>
@@ -34,13 +34,13 @@
                 <div title="艺人推荐配置" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
                     <p>推荐配置列表</p>
                     <p onclick="addNewTab('推荐内容配置','index')">第一个推荐位</p>
-                    <p onclick="addNewTab('name2','test2')">第二个推荐位</p>
-                    <p onclick="addNewTab('name3','xxx.xxx.action')">第三个推荐位</p>
+                    <p onclick="addNewTab('第二个推荐位','test2')">第二个推荐位</p>
+                    <p onclick="addNewTab('推荐内容显示','list')">推荐内容显示</p>
                     <p onclick="addNewTab('mane4','xxx.xxxController')">第四个推荐位</p>
                     <p onclick="addNewTab('name5','xxx.xxx.jsp')">第三个推荐位</p>
                 </div>
                 <div title="艺人相关性" style="padding:10px;">
-                    <p>艺人相关性查询</p>
+                    <p onclick="addNewTab('艺人相关性查询','index')">艺人相关性查询</p>
                 </div>
                 <div title="资产信息" style="padding:10px;">
                     <p>资产信息查询</p>
@@ -59,7 +59,7 @@
     </div>
     <!--页脚-->
     <div region="south" style="text-align: center;height: 50px;">
-        <h3>XX公司</h3>
+        <h3>华数传媒网络有限公司</h3>
     </div>
 </div>
 </body>

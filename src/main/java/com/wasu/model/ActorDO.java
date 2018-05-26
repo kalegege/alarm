@@ -6,18 +6,20 @@ package com.wasu.model;
 public class ActorDO {
     private String name;
     private int id;
-    private int num_develop;
-    private int num_buy;
-    private int num_send;
-    private int num_arrange;
+    private String source;
+    private int num_base;
+    private int status;
+    private String area;
+    private String ctime;
 
-    public ActorDO(String name, int id, int num_develop, int num_buy, int num_send, int num_arrange) {
+    public ActorDO(String name, int id, String source, int num_base, int status, String area, String ctime) {
         this.name = name;
         this.id = id;
-        this.num_develop = num_develop;
-        this.num_buy = num_buy;
-        this.num_send = num_send;
-        this.num_arrange = num_arrange;
+        this.source = source;
+        this.num_base = num_base;
+        this.status = status;
+        this.area = area;
+        this.ctime = ctime;
     }
 
     public String getName() {
@@ -36,35 +38,43 @@ public class ActorDO {
         this.id = id;
     }
 
-    public int getNum_develop() {
-        return num_develop;
+    public String getSource() {
+        return source;
     }
 
-    public void setNum_develop(int num_develop) {
-        this.num_develop = num_develop;
+    public void setSource(String source) {
+        this.source = source;
     }
 
-    public int getNum_buy() {
-        return num_buy;
+    public int getNum_base() {
+        return num_base;
     }
 
-    public void setNum_buy(int num_buy) {
-        this.num_buy = num_buy;
+    public void setNum_base(int num_base) {
+        this.num_base = num_base;
     }
 
-    public int getNum_send() {
-        return num_send;
+    public int getStatus() {
+        return status;
     }
 
-    public void setNum_send(int num_send) {
-        this.num_send = num_send;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public int getNum_arrange() {
-        return num_arrange;
+    public String getCtime() {
+        return ctime;
     }
 
-    public void setNum_arrange(int num_arrange) {
-        this.num_arrange = num_arrange;
+    public void setCtime(String ctime) {
+        this.ctime = ctime;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }
