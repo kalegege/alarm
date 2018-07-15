@@ -1,7 +1,6 @@
 package com.wasu.controller;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.wasu.model.ActorDO;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -39,6 +38,16 @@ public class ActorController {
     @RequestMapping(value = "/list")
     public Object listPage(HttpServletRequest request) throws Exception {
         return "actor/list";
+    }
+
+    @RequestMapping(value = "/movies")
+    public Object player(HttpServletRequest request,Model model,String name) throws Exception {
+        if(null == name){
+            model.addAttribute("url","http://192.168.1.109/movies/3kv4bu.mp4");
+        }else{
+            model.addAttribute("url","http://192.168.1.109/movies/"+name);
+        }
+        return "actor/movies";
     }
 
     @RequestMapping(value = "/getTableInfo")

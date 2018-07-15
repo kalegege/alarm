@@ -36,7 +36,7 @@
                     <p onclick="addNewTab('推荐内容配置','index')">第一个推荐位</p>
                     <p onclick="addNewTab('第二个推荐位','test2')">第二个推荐位</p>
                     <p onclick="addNewTab('推荐内容显示','list')">推荐内容显示</p>
-                    <p onclick="addNewTab('mane4','xxx.xxxController')">第四个推荐位</p>
+                    <p onclick="addNewTab('看电影','movies')">看电影</p>
                     <p onclick="addNewTab('name5','xxx.xxx.jsp')">第三个推荐位</p>
                 </div>
                 <div title="艺人相关性" style="padding:10px;">
