@@ -1,52 +1,45 @@
 package com.wasu.model;
 
+import java.util.Date;
+
 public class Role {
-    /**
-     * id   key
-     * 1    ROLE_ADMIN
-     * 2    ROLE_RESTRICTED_ADMIN
-     * 3    ROLE_USER
-     * 4    ROLE_PUSH
-     * 12   ROLE_SERV
-     * 13   ROLE_JIESAN
-     */
-    private Long id;
+    private Integer roleId;
 
-    private String description;
+    private String roleName;
 
-    private String roleKey;
+    private Date createdTime;
 
-    private String roleValue;
+    private Date updateTime;
 
-    public Long getId() {
-        return id;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+    public void setRoleName(String roleName) {
+        this.roleName = roleName == null ? null : roleName.trim();
     }
 
-    public String getRoleKey() {
-        return roleKey;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
-    public void setRoleKey(String roleKey) {
-        this.roleKey = roleKey == null ? null : roleKey.trim();
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
-    public String getRoleValue() {
-        return roleValue;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setRoleValue(String roleValue) {
-        this.roleValue = roleValue == null ? null : roleValue.trim();
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

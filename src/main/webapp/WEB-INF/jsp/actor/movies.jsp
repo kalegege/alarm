@@ -23,11 +23,11 @@
         <label>请输入时间</label>
         <input type="text" id="time">
         <button id="submit-time">确定</button>
-        <button id="submit-exceed">快进</button>
     </div>
     <div>
         <label>当前时间</label>
         <input type="text" id="ctime">
+        <button id="submit-exceed">快进</button>
     </div>
     <video controls class="player" id="myVideo">
         <source type="video/mp4" src="${url}" />

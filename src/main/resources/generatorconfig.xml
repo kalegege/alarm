@@ -16,9 +16,9 @@
 		<!--</jdbcConnection>-->
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://60.205.117.142/fcdb1?useUnicode=true&amp;characterEncoding=UTF-8"
-                        userId="db_read"
-                        password="Read#2017">
+                        connectionURL="jdbc:mysql://localhost/actor?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="root"
+                        password="123456">
         </jdbcConnection>
 
         <javaTypeResolver>
@@ -45,7 +45,10 @@
 <!--     <table tableName="vr_hotel" domainObjectName="Hotel"></table> -->
 <!--     <table tableName="vr_site" domainObjectName="Site"></table> -->
     
-    <table tableName="v_qunzhu" domainObjectName="QunZhu"></table>
+    <table tableName="sec_role" domainObjectName="Role"></table>
+    <table tableName="sec_role_permission" domainObjectName="RolePermission"></table>
+        <table tableName="sec_user" domainObjectName="User"></table>
+        <table tableName="sec_user_role" domainObjectName="UserRole"></table>
         <!--<table tableName="bb_role_authority" domainObjectName="RoleAuthority"></table>-->
 
     </context>

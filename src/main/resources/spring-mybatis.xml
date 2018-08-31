@@ -21,8 +21,6 @@
     <bean id="parentDataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="${jdbc.driver}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
         <!-- 初始化连接大小 -->
         <property name="initialSize" value="${initialSize}"></property>
         <!-- 连接池最大数量 -->
@@ -37,10 +35,20 @@
 
     <bean parent="parentDataSource" id="tableDataSource">
         <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
     </bean>
 
     <bean parent="parentDataSource" id="virtualDataSource">
         <property name="url" value="${jdbc.virtualurl}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+
+    <bean parent="parentDataSource" id="localDataSource">
+        <property name="url" value="${jdbc.localurl}" />
+        <property name="username" value="${jdbc.localusername}" />
+        <property name="password" value="${jdbc.localpassword}" />
     </bean>
 
     <bean class="com.wasu.utils.DynamicDataSource" id="dataSource">
@@ -48,9 +56,10 @@
             <map key-type="java.lang.String">
                 <entry value-ref="tableDataSource" key="table"></entry>
                 <entry value-ref="virtualDataSource" key="virtual"></entry>
+                <entry value-ref="localDataSource" key="local"></entry>
             </map>
         </property>
-        <property name="defaultTargetDataSource" ref="tableDataSource"></property>
+        <property name="defaultTargetDataSource" ref="localDataSource"></property>
     </bean>
 
     <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->

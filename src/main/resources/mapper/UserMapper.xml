@@ -2,21 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wasu.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="com.wasu.model.User" >
-    <id column="id" property="id" jdbcType="BIGINT" />
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="SMALLINT" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="birthday" property="birthday" jdbcType="DATE" />
-    <result column="department_key" property="departmentKey" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="BIT" />
-    <result column="last_logintime" property="lastLogintime" jdbcType="TIMESTAMP" />
-    <result column="code" property="code" jdbcType="VARCHAR" />
-    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
-    <result column="card_num" property="cardNum" jdbcType="INTEGER" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,8 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_name, sex, email, phone, birthday, department_key, password, status, last_logintime, 
-    code, parent_id, create_time, idcard, card_num
+    user_id, user_name, password, created_time, update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wasu.model.UserExample" >
     select
@@ -86,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from sys_user
+    from sec_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,186 +83,88 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from sys_user
-    where id = #{id,jdbcType=BIGINT}
+    from sec_user
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from sys_user
-    where id = #{id,jdbcType=BIGINT}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sec_user
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.wasu.model.UserExample" >
-    delete from sys_user
+    delete from sec_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.wasu.model.User" >
-    insert into sys_user (id, user_name, sex, 
-      email, phone, birthday, 
-      department_key, password, status, 
-      last_logintime, code, parent_id, 
-      create_time, idcard, card_num
-      )
-    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{sex,jdbcType=SMALLINT}, 
-      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
-      #{departmentKey,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, 
-      #{lastLogintime,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{idcard,jdbcType=VARCHAR}, #{cardNum,jdbcType=INTEGER}
-      )
+    insert into sec_user (user_id, user_name, password, 
+      created_time, update_time)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wasu.model.User" >
-    insert into sys_user
+    insert into sec_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
+      <if test="userId != null" >
+        user_id,
       </if>
       <if test="userName != null" >
         user_name,
       </if>
-      <if test="sex != null" >
-        sex,
-      </if>
-      <if test="email != null" >
-        email,
-      </if>
-      <if test="phone != null" >
-        phone,
-      </if>
-      <if test="birthday != null" >
-        birthday,
-      </if>
-      <if test="departmentKey != null" >
-        department_key,
-      </if>
       <if test="password != null" >
         password,
       </if>
-      <if test="status != null" >
-        status,
+      <if test="createdTime != null" >
+        created_time,
       </if>
-      <if test="lastLogintime != null" >
-        last_logintime,
-      </if>
-      <if test="code != null" >
-        code,
-      </if>
-      <if test="parentId != null" >
-        parent_id,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="idcard != null" >
-        idcard,
-      </if>
-      <if test="cardNum != null" >
-        card_num,
+      <if test="updateTime != null" >
+        update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=SMALLINT},
-      </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null" >
-        #{birthday,jdbcType=DATE},
-      </if>
-      <if test="departmentKey != null" >
-        #{departmentKey,jdbcType=VARCHAR},
-      </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=BIT},
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="lastLogintime != null" >
-        #{lastLogintime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="code != null" >
-        #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null" >
-        #{parentId,jdbcType=BIGINT},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="idcard != null" >
-        #{idcard,jdbcType=VARCHAR},
-      </if>
-      <if test="cardNum != null" >
-        #{cardNum,jdbcType=INTEGER},
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.wasu.model.UserExample" resultType="java.lang.Integer" >
-    select count(*) from sys_user
+    select count(*) from sec_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update sys_user
+    update sec_user
     <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=BIGINT},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.userName != null" >
         user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
-      <if test="record.sex != null" >
-        sex = #{record.sex,jdbcType=SMALLINT},
-      </if>
-      <if test="record.email != null" >
-        email = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone != null" >
-        phone = #{record.phone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.birthday != null" >
-        birthday = #{record.birthday,jdbcType=DATE},
-      </if>
-      <if test="record.departmentKey != null" >
-        department_key = #{record.departmentKey,jdbcType=VARCHAR},
-      </if>
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=BIT},
+      <if test="record.createdTime != null" >
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.lastLogintime != null" >
-        last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.code != null" >
-        code = #{record.code,jdbcType=VARCHAR},
-      </if>
-      <if test="record.parentId != null" >
-        parent_id = #{record.parentId,jdbcType=BIGINT},
-      </if>
-      <if test="record.createTime != null" >
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.idcard != null" >
-        idcard = #{record.idcard,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cardNum != null" >
-        card_num = #{record.cardNum,jdbcType=INTEGER},
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -281,90 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update sys_user
-    set id = #{record.id,jdbcType=BIGINT},
+    update sec_user
+    set user_id = #{record.userId,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=SMALLINT},
-      email = #{record.email,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      birthday = #{record.birthday,jdbcType=DATE},
-      department_key = #{record.departmentKey,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=BIT},
-      last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
-      code = #{record.code,jdbcType=VARCHAR},
-      parent_id = #{record.parentId,jdbcType=BIGINT},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      idcard = #{record.idcard,jdbcType=VARCHAR},
-      card_num = #{record.cardNum,jdbcType=INTEGER}
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.wasu.model.User" >
-    update sys_user
+    update sec_user
     <set >
       <if test="userName != null" >
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=SMALLINT},
-      </if>
-      <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null" >
-        birthday = #{birthday,jdbcType=DATE},
-      </if>
-      <if test="departmentKey != null" >
-        department_key = #{departmentKey,jdbcType=VARCHAR},
-      </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=BIT},
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="lastLogintime != null" >
-        last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="code != null" >
-        code = #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null" >
-        parent_id = #{parentId,jdbcType=BIGINT},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="idcard != null" >
-        idcard = #{idcard,jdbcType=VARCHAR},
-      </if>
-      <if test="cardNum != null" >
-        card_num = #{cardNum,jdbcType=INTEGER},
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wasu.model.User" >
-    update sys_user
+    update sec_user
     set user_name = #{userName,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=SMALLINT},
-      email = #{email,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      birthday = #{birthday,jdbcType=DATE},
-      department_key = #{departmentKey,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      status = #{status,jdbcType=BIT},
-      last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
-      code = #{code,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=BIGINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      idcard = #{idcard,jdbcType=VARCHAR},
-      card_num = #{cardNum,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>
